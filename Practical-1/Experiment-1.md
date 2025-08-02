@@ -52,7 +52,7 @@ Create a **Student Registration Form** that includes the following features:
 
 ### Preview:
 
-[Student Registration Form Screenshot](Experimet-1_Output.png)
+[Student Registration Form Screenshot](Experiment-1_Output.png)
 
 ---
 
