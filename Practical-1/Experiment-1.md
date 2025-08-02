@@ -11,7 +11,6 @@ To design and develop a student registration form using HTML5 that collects basi
 
 - To understand and implement HTML5 form elements.
 - To apply built-in HTML5 validation features to improve user input quality.
-- To practice clean and accessible form design using HTML and CSS.
 
 ---
 
@@ -34,10 +33,9 @@ Create a **Student Registration Form** that includes the following features:
 1. Set up a basic HTML5 document structure.
 2. Added input fields with corresponding labels.
 3. Used HTML5 validation attributes:
-   - `required` to ensure no field is left empty.
+   - `type="text"` to name input.
    - `type="email"` to validate proper email format.
-   - `type="number"` with `min` and `max` to restrict age input.
-4. Applied styling using an external CSS file (`style.css`) for aesthetics.
+   - `type="number"` to age input.
 5. Tested the form to verify validation and layout.
 
 ---
@@ -64,7 +62,6 @@ By completing this project, you will have learned:
 
 - How to create forms using semantic HTML5.
 - The importance and implementation of input validation.
-- Styling form elements using CSS for a modern UI.
 - Structuring responsive and accessible form layouts.
 
 ---
