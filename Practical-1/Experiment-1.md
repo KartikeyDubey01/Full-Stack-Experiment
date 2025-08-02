@@ -46,35 +46,7 @@ Create a **Student Registration Form** that includes the following features:
 
 ### 📄 index.html
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students Feedback Form</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <h2>Student Registration Form</h2>
-    <form>
-        <label>Name: </label> 
-        <br>
-        <input type="text" placeholder="Enter Your Name" required> 
-        <br><br>
-        <label>Email: </label> 
-        <br>
-        <input type="email" placeholder="Enter Your Email" required> 
-        <br><br>
-        <label>Age: </label> 
-        <br>
-        <input type="number" placeholder="Enter Your Age" required min="1" max="100"> 
-        <br><br>
-        <input type="submit" value="Register">
-    </form>
-</body>
-</html>
-```
+[HTML Code](index.html)
 
 ---
 
@@ -82,7 +54,7 @@ Create a **Student Registration Form** that includes the following features:
 
 ### Preview:
 
-
+[Student Registration Form Screenshot](Experimet-1_Output.png)
 
 ---
 
