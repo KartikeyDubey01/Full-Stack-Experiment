@@ -1,11 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Banking UI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      color: white;
+      background-color: white;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+    }
+
+    .card {
+      padding: 30px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 300px;
+    }
+
+    .balance {
+      font-size: 32px;
+      color: darkgreen; 
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 0;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+
+    .btn.deposit {
+      background-color: green;
+    }
+
+    .btn.withdraw {
+      background-color: red;
+    }
+  </style>
 </head>
 <body>
-    
+
+  <div class="card">
+    <div class="balance">$0</div>
+    <button class="btn deposit">Deposit</button>
+    <button class="btn withdraw">Withdraw</button>
+  </div>
+
 </body>
 </html>
