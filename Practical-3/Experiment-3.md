@@ -52,11 +52,10 @@ Requirements:
 
 ## 📸 Output Preview
 
-Include a screenshot of the dashboard in your repository (e.g. `assets/admin-dashboard.png`) and reference it in this README like:
 
-[Output In Ligth Theme](Experimemt-03_Output/Ouput-01)
+[Output In Ligth Theme](Experimemt-03_Output/Ouput-01.png)
 
-[Output In Dark Theme](Experiment-03_Output/Ouput-02)
+[Output In Dark Theme](Experiment-03_Output/Ouput-02.png)
 
 ---
 
