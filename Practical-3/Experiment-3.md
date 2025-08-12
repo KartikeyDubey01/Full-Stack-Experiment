@@ -53,9 +53,9 @@ Requirements:
 ## 📸 Output Preview
 
 
-[Output In Ligth Theme](Experimemt-03_Output/Ouput-01.png)
+[Output In Ligth Theme](Experimemt-03_Output/Output-01.png)
 
-[Output In Dark Theme](Experiment-03_Output/Ouput-02.png)
+[Output In Dark Theme](Experiment-03_Output/Output-02.png)
 
 ---
 
