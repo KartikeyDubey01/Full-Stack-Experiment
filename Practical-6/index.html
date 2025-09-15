@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Drawing Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .drawing-container {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        #drawingCanvas {
+            border: 2px solid #333;
+            background-color: #f9f9f9;
+            cursor: crosshair;
+            display: block;
+        }
+
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .instruction {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="drawing-container">
+        <h1>SVG Drawing Tool</h1>
+        
+        <svg id="drawingCanvas" width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Drawing area -->
+        </svg>
+
+        <div class="controls">
+            <p class="instruction">Click and drag to draw</p>
+        </div>
+    </div>
+
+    <script>
+        class FreehandDrawingTool {
+            constructor() {
+                this.canvas = document.getElementById('drawingCanvas');
+                this.isDrawing = false;
+                this.currentPath = null;
+                this.pathData = [];
+                
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // Mouse events for drawing
+                this.canvas.addEventListener('mousedown', (e) => this.startDrawing(e));
+                this.canvas.addEventListener('mousemove', (e) => this.draw(e));
+                this.canvas.addEventListener('mouseup', () => this.stopDrawing());
+                this.canvas.addEventListener('mouseleave', () => this.stopDrawing());
+                
+                // Touch events for mobile support
+                this.canvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    const mouseEvent = new MouseEvent('mousedown', {
+                        clientX: touch.clientX,
+                        clientY: touch.clientY
+                    });
+                    this.canvas.dispatchEvent(mouseEvent);
+                });
+                
+                this.canvas.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    const mouseEvent = new MouseEvent('mousemove', {
+                        clientX: touch.clientX,
+                        clientY: touch.clientY
+                    });
+                    this.canvas.dispatchEvent(mouseEvent);
+                });
+                
+                this.canvas.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    this.stopDrawing();
+                });
+            }
+
+            getMousePos(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                return {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+            }
+
+            startDrawing(e) {
+                this.isDrawing = true;
+                const pos = this.getMousePos(e);
+                
+                // Start new path
+                this.pathData = [`M ${pos.x} ${pos.y}`];
+                this.currentPath = this.createPath();
+                this.canvas.appendChild(this.currentPath);
+            }
+
+            draw(e) {
+                if (!this.isDrawing || !this.currentPath) return;
+
+                const pos = this.getMousePos(e);
+                
+                // Add line to current position
+                this.pathData.push(`L ${pos.x} ${pos.y}`);
+                this.currentPath.setAttribute('d', this.pathData.join(' '));
+            }
+
+            stopDrawing() {
+                this.isDrawing = false;
+                this.currentPath = null;
+                this.pathData = [];
+            }
+
+            createPath() {
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('stroke', '#0066cc'); // Fixed blue color
+                path.setAttribute('stroke-width', '3'); // Fixed stroke width
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke-linecap', 'round');
+                path.setAttribute('stroke-linejoin', 'round');
+                
+                return path;
+            }
+        }
+
+        // Initialize the drawing tool when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new FreehandDrawingTool();
+        });
+    </script>
+</body>
+</html>
