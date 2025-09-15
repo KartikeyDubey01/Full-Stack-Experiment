@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Entry and Filter</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: white;
+        margin: 20px;
+    }
+    
+    h2 {
+        text-align: center;
+    }
+
+    .box {
+        max-width: 500px;
+        margin: auto;
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid ;
+    }
+
+    .input-box {
+        margin-bottom: 10px;
+    }
+
+    input, button {
+        width: 95%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid;
+        font-size: 14px;
+    }
+
+    button {
+        background: black;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: green;
+    }
+
+    .filter-box {
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px solid;
+    }
+
+    .product-list {
+        margin-top: 15px;
+    }
+
+    .product-item {
+        border: 2px solid ;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 8px;
+        background: white;
+    }
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Product Entry</h2>
+    <div class="input-box">
+        <input type="text" id="productId" placeholder="Product ID">
+    </div>
+    <div class="input-box">
+        <input type="text" id="productName" placeholder="Product Name">
+    </div>
+    <div class="input-box">
+        <input type="number" id="productPrice" placeholder="Product Price">
+    </div>
+    <div class="input-box">
+        <input type="text" id="productCategory" placeholder="Product Category">
+    </div>
+    <div class="input-box">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <div class="filter-box">
+        <input type="text" id="filterInput" placeholder="Filter by Product Name" oninput="filterProducts()">
+        <br><br>
+        <input type="text" id="categoryFilterInput" placeholder="Enter Category Name">
+        <button onclick="filterByCategory()">Filter by Category</button>
+    </div>
+
+    <div class="product-list" id="productList"></div>
+</div>
+
+<script>
+const products = [];
+
+function addProduct() {
+    const id = document.getElementById('productId').value.trim();
+    const name = document.getElementById('productName').value.trim();
+    const price = document.getElementById('productPrice').value.trim();
+    const category = document.getElementById('productCategory').value.trim();
+
+    if (!id || !name || !price || !category) {
+        alert('Please fill all the fields.');
+        return;
+    }
+
+    products.push({ id, name, price, category });
+    displayProducts(products);
+
+    document.getElementById('productId').value = '';
+    document.getElementById('productName').value = '';
+    document.getElementById('productPrice').value = '';
+    document.getElementById('productCategory').value = '';
+}
+
+function displayProducts(list) {
+    const productList = document.getElementById('productList');
+    productList.innerHTML = '';
+    list.forEach(product => {
+        const div = document.createElement('div');
+        div.className = 'product-item';
+
+        div.innerHTML = `<b>ID:</b> ${product.id} <br>
+                         <b>Name:</b> ${product.name} <br>
+                         <b>Price:</b> ₹${product.price} <br>
+                         <b>Category:</b> ${product.category}`;
+        productList.appendChild(div);
+    });
+}
+
+function filterProducts() {
+    const filter = document.getElementById('filterInput').value.trim().toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(filter));
+    displayProducts(filtered);
+}
+
+function filterByCategory() {
+    const categoryFilter = document.getElementById('categoryFilterInput').value.trim().toLowerCase();
+    const filtered = products.filter(p => p.category.toLowerCase() === categoryFilter);
+    displayProducts(filtered);
+}
+</script>
+
+</body>
+</html>

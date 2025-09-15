@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Entry and Filter</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .input-box { margin-bottom: 10px; }
+        .product-list { margin-top: 20px; }
+        .product-item { border: 1px solid #923939; padding: 8px; margin-bottom: 5px; }
+        .filter-box { margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h2>Add Product</h2>
+    <div class="input-box">
+        <input type="text" id="productId" placeholder="Product ID">
+    </div>
+    <div class="input-box">
+        <input type="text" id="productName" placeholder="Product Name">
+    </div>
+    <div class="input-box">
+        <input type="number" id="productPrice" placeholder="Product Price">
+    </div>
+    <div class="input-box">
+        <input type="text" id="productCategory" placeholder="Product Category">
+    </div>
+    <div class="input-box">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <div class="filter-box">
+        <input type="text" id="filterInput" placeholder="Filter by Product Name" oninput="filterProducts()">
+        <button onclick="filterByCategory()">Filter by Category</button>
+        <input type="text" id="categoryFilterInput" placeholder="Enter Category Name">
+    </div>
+
+    <div class="product-list" id="productList"></div>
+
+    <script>
+        const products = [];
+
+        function addProduct() {
+            const id = document.getElementById('productId').value.trim();
+            const name = document.getElementById('productName').value.trim();
+            const price = document.getElementById('productPrice').value.trim();
+            const category = document.getElementById('productCategory').value.trim();
+
+            if (!id || !name || !price || !category) {
+                alert('Please fill all the boxes.');
+                return;
+            }
+
+            products.push({ id, name, price, category });
+            displayProducts(products);
+            document.getElementById('productId').value = '';
+            document.getElementById('productName').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productCategory').value = '';
+        }
+
+        function displayProducts(list) {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            list.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'product-item';
+                let color = '#923939'; 
+                if (product.category.toLowerCase() === 'electronics') color = '#1e90ff';
+                else if (product.category.toLowerCase() === 'clothing') color = '#228b22';
+                else if (product.category.toLowerCase() === 'food') color = '#ff8c00';
+                div.style.borderColor = color;
+                div.style.backgroundColor = color + '22'; 
+                div.innerHTML = `<b>ID:</b> ${product.id}, <b>Name:</b> ${product.name}, <b>Price:</b> ${product.price}, <b>Category:</b> <span style="color:${color}">${product.category}</span>`;
+                productList.appendChild(div);
+            });
+        }
+
+        function filterProducts() {
+            const filter = document.getElementById('filterInput').value.trim().toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(filter));
+            displayProducts(filtered);
+        }
+
+        function filterByCategory() {
+            const categoryFilter = document.getElementById('categoryFilterInput').value.trim().toLowerCase();
+            const filtered = products.filter(p => p.category.toLowerCase() === categoryFilter);
+            displayProducts(filtered);
+        }
+    </script>
+</body>
+</html>
